@@ -1,0 +1,45 @@
+// Contains a function ArrMax.arrMax that finds and returns the largest element in the array a of length b.
+// a & b are both supplied as arguments
+
+// Put your code here.
+
+function ArrMax.arrMax 1
+    push constant 0
+    pop local 0
+//while (argument 1 > 0)
+label LOOP
+    push argument 1
+    push constant 0
+    lt
+    if-goto END
+    
+    //set pointer to first element in array
+    push argument 0
+    pop pointer 0
+
+    //increment array pointer
+    push argument 0
+    push constant 1
+    add
+    pop argument 0
+
+    //decrement z
+    push argument 1
+    push constant 1
+    sub
+    pop argument 1
+
+    //compare max to current array value
+    push this 0
+    push local 0
+    lt
+    if-goto LOOP
+
+    //replace max
+    push this 0
+    pop local 0
+    goto LOOP
+
+label END
+    push local 0
+    return
