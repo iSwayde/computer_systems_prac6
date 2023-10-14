@@ -41,7 +41,7 @@ label INTER
 label NEGNEG
     push local 0
     push static 1
-    add
+    sub
     pop local 0
     goto INTER
 
