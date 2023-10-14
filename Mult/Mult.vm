@@ -19,9 +19,8 @@ label START
     if-goto END
     push static 2
     push constant 0
-    lt
-    if-goto NEG
-    goto POS
+    gt
+    if-goto POS
 
 label NEG
     push static 1
