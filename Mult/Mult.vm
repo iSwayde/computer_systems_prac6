@@ -7,7 +7,7 @@
     pop local 0
     push static 0
     pop static 2
-label START
+
     push static 1
     push constant 0
     eq
@@ -16,6 +16,7 @@ label START
     push constant 0
     eq
     if-goto END
+label START
     push static 2
     push constant 0
     lt
