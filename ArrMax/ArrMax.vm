@@ -4,12 +4,24 @@
 // Put your code here.
 
 function ArrMax.arrMax 1
-    push constant 0
+    push argument 0
+    pop pointer 0
+    push this 0
     pop local 0
+
+    push argument 0
+    push constant 1
+    add
+    pop argument 0
+    push argument 1
+    push constant 1
+    sub
+    pop argument 1
+
 //while (argument 1 > 0)
 label LOOP
     push argument 1
-    push constant 0
+    push constant 1
     lt
     if-goto END
     
