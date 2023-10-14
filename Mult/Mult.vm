@@ -34,27 +34,15 @@ label POS
     goto START
 
 label NEG
-    push static 1
-    push constant 0
-    lt
-    if-goto NEGNEG
     push local 0
     push static 1
     sub
     pop local 0
-label INTER
     push static 2
     push constant 1
     add
     pop static 2
     goto START
-
-label NEGNEG
-    push local 0
-    push static 1
-    sub
-    pop local 0
-    goto INTER
 
 label END
     goto END
