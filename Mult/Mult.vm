@@ -12,11 +12,11 @@
     push constant 0
     eq
     if-goto END
+label START
     push static 2
     push constant 0
     eq
     if-goto END
-label START
     push static 2
     push constant 0
     lt
