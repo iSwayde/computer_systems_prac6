@@ -64,17 +64,17 @@ string VMTranslator::vm_pop(string segment, int offset){
 
 /** Generate Hack Assembly code for a VM add operation */
 string VMTranslator::vm_add(){
-    return "@SP\nAM=M-1\nD=M\nA=A-1\nM=D+M\n";
+    return "@SP\nAM=M-1\nD=M\nA=A-1\nM=D+M";
 }
 
 /** Generate Hack Assembly code for a VM sub operation */
 string VMTranslator::vm_sub(){
-    return "@SP\nAM=M-1\nD=M\nA=A-1\nM=M-D\n";
+    return "@SP\nAM=M-1\nD=M\nA=A-1\nM=M-D";
 }
 
 /** Generate Hack Assembly code for a VM neg operation */
 string VMTranslator::vm_neg(){
-    return "@SP\nAM=M-1\nD=M\nM=-D\n";
+    return "@SP\nAM=M-1\nM=-M\n@SP\nM=M+1";
 }
 
 /** Generate Hack Assembly code for a VM eq operation */
