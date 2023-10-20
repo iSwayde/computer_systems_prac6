@@ -27,31 +27,31 @@ string VMTranslator::vm_push(string segment, int offset){
         temp += "\nD=A\n@SP\nAM=M+1\nA=A-1\nM=D";
     }
     //static
-    if (segment == "static"){
-        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+    else if (segment == "static"){
+        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
     }
     //pointer
-    if (segment == "pointer"){
+    else if (segment == "pointer"){
         temp += "\nD+M\n@3\nA=D+A\nD=M\n@SP\nA=M\nM=D";
     }
     //temp
-    if (segment == "temp"){
+    else if (segment == "temp"){
         temp += "\nD+M\n@5\nA=D+A\nD=M\n@SP\nA=M\nM=D";
     }
     //local
-    if (segment == "local"){
+    else if (segment == "local"){
         temp += "\nD=A\n@LOCAL\nA=D+M\nD=M\n@SP\nA=M\nM=D";
     }
     //argument
-    if (segment == "argument"){
+    else if (segment == "argument"){
         temp += "\nD=M\n@ARG\nA=D+M\nD=M\n@SP\nA=M\nM=D";
     }
     //this
-    if (segment == "this"){
+    else if (segment == "this"){
         temp += "\nD+M\n@THIS\nA=D+A\nD=M\n@SP\nA=M\nM=D";
     }
     //that
-    if (segment == "that"){
+    else if (segment == "that"){
         temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nA=M\nM=D";
     }    
     return temp;;
