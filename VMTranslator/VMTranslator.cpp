@@ -40,11 +40,11 @@ string VMTranslator::vm_push(string segment, int offset){
     }
     //local
     else if (segment == "local"){
-        temp += "\nD=A\n@LOCAL\nA=D+M\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD=A\n@LCL\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
     }
     //argument
     else if (segment == "argument"){
-        temp += "\nD=M\n@ARG\nA=D+M\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD=M\n@ARG\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
     }
     //this
     else if (segment == "this"){
@@ -54,7 +54,7 @@ string VMTranslator::vm_push(string segment, int offset){
     else if (segment == "that"){
         temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
     }    
-    return temp;;
+    return temp;
 }
 
 /** Generate Hack Assembly code for a VM pop operation */
