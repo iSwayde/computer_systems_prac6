@@ -76,7 +76,7 @@ string VMTranslator::vm_pop(string segment, int offset){
     }
     //pointer
     if (segment == "pointer"){
-        temp += "@SP\nAM=M-1\nD=M\n@";
+        temp += "@SP\nAM=M-1\nD=A\n@";
         if (offset == 0)
             temp += "3\n";
         else if (offset == 1)
