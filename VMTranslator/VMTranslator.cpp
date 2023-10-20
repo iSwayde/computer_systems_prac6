@@ -59,7 +59,7 @@ string VMTranslator::vm_push(string segment, int offset){
 
 /** Generate Hack Assembly code for a VM pop operation */
 string VMTranslator::vm_pop(string segment, int offset){  
-    string temp; = "";
+    string temp = "";
     //constant
     if (segment == "constant"){
         temp += "@SP\nAM=M-1\nD=M\n@";
