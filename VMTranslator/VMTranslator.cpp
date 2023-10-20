@@ -24,7 +24,7 @@ string VMTranslator::vm_push(string segment, int offset){
     temp += to_string(offset);
     //constant
     if (segment == "constant"){
-        temp += "\nD=A\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1";
     }
     //static
     else if (segment == "static"){
