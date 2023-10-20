@@ -24,35 +24,35 @@ string VMTranslator::vm_push(string segment, int offset){
     temp += to_string(offset);
     //constant
     if (segment == "constant"){
-        temp += "\nD=A\n@SP\nAM=M+1\nA=A-1\nM=D\n@SP\nM=M+1\n";
+        temp += "\nD=A\n@SP\nAM=M+1\nA=A-1\nM=D\n";
     }
     //static
     if (segment == "static"){
-        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n";
+        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }
     //pointer
     if (segment == "pointer"){
-        temp += "\nD+M\n@3\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n";
+        temp += "\nD+M\n@3\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }
     //temp
     if (segment == "temp"){
-        temp += "\nD+M\n@5\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n";
+        temp += "\nD+M\n@5\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }
     //local
     if (segment == "local"){
-        temp += "\nD=A\n@LOCAL\nA=D+M\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n";
+        temp += "\nD=A\n@LOCAL\nA=D+M\nD=M\n@SP\nA=M\nM=D\n";
     }
     //argument
     if (segment == "argument"){
-        temp += "\nD=M\n@ARG\nA=D+M\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n";
+        temp += "\nD=M\n@ARG\nA=D+M\nD=M\n@SP\nA=M\nM=D\n";
     }
     //this
     if (segment == "this"){
-        temp += "\nD+M\n@THIS\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n";
+        temp += "\nD+M\n@THIS\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }
     //that
     if (segment == "that"){
-        temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n";
+        temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }    
     return temp;;
 }
@@ -74,7 +74,7 @@ string VMTranslator::vm_sub(){
 
 /** Generate Hack Assembly code for a VM neg operation */
 string VMTranslator::vm_neg(){
-    return "@SP\nAM=M-1\nM=-M\n";
+    return "@SP\nAM=M-1\nD=-M\nM=D\n";
 }
 
 /** Generate Hack Assembly code for a VM eq operation */
