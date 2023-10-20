@@ -76,7 +76,7 @@ string VMTranslator::vm_pop(string segment, int offset){
     }
     //pointer
     if (segment == "pointer"){
-        temp += "@SP\nAM=M-1\nD=A\n@";
+        temp += "@SP\nAM=M-1\nD=M\n@";
         if (offset == 0)
             temp += "3\n";
         else if (offset == 1)
@@ -106,11 +106,11 @@ string VMTranslator::vm_pop(string segment, int offset){
     }
     //this
     if (segment == "this"){
-        temp += "@SP\nAM=M-1\nD=M\n@THIS\nM=D";
+        temp += "@SP\nAM=M-1\nD=A\n@THIS\nM=D";
     }
     //that
 if (segment == "that"){
-        temp += "@SP\nAM=M-1\nD=M\n@THAT\nM=D";
+        temp += "@SP\nAM=M-1\nD=A\n@THAT\nM=D";
     }
     return temp;
 }
