@@ -64,7 +64,7 @@ string VMTranslator::vm_pop(string segment, int offset){
     if (segment == "constant"){
         temp += "@SP\nAM=M-1\nD=M\n@";
         temp += to_string(offset);
-        temp += "\nM=D";
+        temp += "\nM=D\n@SP\nM=M+1";
     }
     //static
     if (segment == "static"){
@@ -72,17 +72,17 @@ string VMTranslator::vm_pop(string segment, int offset){
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
                 
-        temp += "\nM=D";
+        temp += "\nM=D\n@SP\nM=M+1";
     }
     //pointer
     if (segment == "pointer"){
         temp += "@SP\nAM=M-1\nD=M\n@";
         if (offset == 0)
             temp += "3\n";
-        else
+        else if (offset == 1)
             temp += "4\n";
                 
-        temp += "\nM=D";
+        temp += "\nM=D\n@SP\nM=M+1";
     }
     //temp
     if (segment == "temp"){
@@ -90,7 +90,7 @@ string VMTranslator::vm_pop(string segment, int offset){
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
 
-        temp += "\nM=D";
+        temp += "\nM=D\n@SP\nM=M+1";
     }
     //local
     if (segment == "local"){
@@ -98,19 +98,19 @@ string VMTranslator::vm_pop(string segment, int offset){
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
         
-        temp += "M=D";
+        temp += "M=D\n@SP\nM=M+1";
     }
     //argument
     if (segment == "argument"){
-        temp += "@SP\nAM=M-1\nD=M\n@ARG\nM=D";
+        temp += "@SP\nAM=M-1\nD=M\n@ARG\nM=D\n@SP\nM=M+1";
     }
     //this
     if (segment == "this"){
-        temp += "@SP\nAM=M-1\nD=M\n@THIS\nM=D";
+        temp += "@SP\nAM=M-1\nD=M\n@THIS\nM=D\n@SP\nM=M+1";
     }
     //that
 if (segment == "that"){
-        temp += "@SP\nAM=M-1\nD=M\n@THAT\nM=D";
+        temp += "@SP\nAM=M-1\nD=M\n@THAT\nM=D\n@SP\nM=M+1";
     }
     return temp;
 }
