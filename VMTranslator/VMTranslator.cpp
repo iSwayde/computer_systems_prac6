@@ -24,35 +24,35 @@ string VMTranslator::vm_push(string segment, int offset){
     temp += to_string(offset);
     //constant
     if (segment == "constant"){
-        temp += "\nD=A\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD=A\n@SP\nAM=M+1\nA=A-1\nM=D\n";
     }
     //static
     if (segment == "static"){
-        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }
     //local
     if (segment == "local"){
-        temp += "\nD=A\n@LCL\nA=D+M\nD=M\n@SP\nA=M\nM=D";
+        temp += "\nD=A\n@LOCAL\nA=D+M\nD=M\n@SP\nA=M\nM=D\n";
     }
     //argument
     if (segment == "argument"){
-        temp += "\nD=M\n@ARG\nA=D+M\nD=M\n@SP\nA=M\nM=D";
+        temp += "\nD=M\n@ARG\nA=D+M\nD=M\n@SP\nA=M\nM=D\n";
     }
     //pointer
     if (segment == "pointer"){
-        temp += "\nD+M\n@3\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+        temp += "\nD+M\n@3\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }
     //this
     if (segment == "this"){
-        temp += "\nD+M\n@THIS\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+        temp += "\nD+M\n@THIS\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }
     //that
     if (segment == "that"){
-        temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+        temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }    
     //temp
     if (segment == "temp"){
-        temp += "\nD+M\n@5\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+        temp += "\nD+M\n@5\nA=D+A\nD=M\n@SP\nA=M\nM=D\n";
     }
     return temp;;
 }
@@ -64,12 +64,12 @@ string VMTranslator::vm_pop(string segment, int offset){
 
 /** Generate Hack Assembly code for a VM add operation */
 string VMTranslator::vm_add(){
-    return "";
+    return "@SP\nAM=M-1\nD=M\nA=A-1\nM=D+M\n";
 }
 
 /** Generate Hack Assembly code for a VM sub operation */
 string VMTranslator::vm_sub(){
-    return "";
+    return "@SP\nAM=M-1\nD=M\nA=A-1\nM=D-M\n";
 }
 
 /** Generate Hack Assembly code for a VM neg operation */
