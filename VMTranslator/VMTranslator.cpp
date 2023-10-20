@@ -24,7 +24,7 @@ string VMTranslator::vm_push(string segment, int offset){
     temp += to_string(offset);
     //constant
     if (segment == "constant"){
-        temp += "\nD=A\n@SP\nAM=M+1\nA=A-1\nM=D\n";
+        temp += "\nD=A\n@SP\nA=M\nM=D\n";
     }
     //static
     if (segment == "static"){
@@ -74,7 +74,7 @@ string VMTranslator::vm_sub(){
 
 /** Generate Hack Assembly code for a VM neg operation */
 string VMTranslator::vm_neg(){
-    return "@SP\nAM=M-1\nD=-M\nM=D\n";
+    return "@SP\nAM=M-1\nD=M\nM=-D\n";
 }
 
 /** Generate Hack Assembly code for a VM eq operation */
