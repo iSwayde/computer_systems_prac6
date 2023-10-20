@@ -67,7 +67,9 @@ string VMTranslator::vm_pop(string segment, int offset){
         temp += "\nM=D";
     }
     //static
-
+    if (segment == "static"){
+        temp += "@SP\nAM=M-1\nD=M\n@16\nM=D";
+    }
     //pointer
 
     //temp
