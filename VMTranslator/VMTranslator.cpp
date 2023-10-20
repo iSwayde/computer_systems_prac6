@@ -75,6 +75,13 @@ string VMTranslator::vm_pop(string segment, int offset){
     //temp
 
     //local
+    if (segment == "local"){
+        temp += "@SP\nAM=M-1\nD=M\n@LCL\n";
+        for (int i=0; i<offset; i++)
+            temp += "A=A+1\n";
+        
+        temp += "M=D";
+    }
 
     //argument
 
@@ -82,7 +89,7 @@ string VMTranslator::vm_pop(string segment, int offset){
 
     //that
 
-    return "";
+    return temp;
 }
 
 /** Generate Hack Assembly code for a VM add operation */
