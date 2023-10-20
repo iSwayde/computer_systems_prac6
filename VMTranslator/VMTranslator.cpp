@@ -20,7 +20,41 @@ VMTranslator::~VMTranslator() {
 
 /** Generate Hack Assembly code for a VM push operation */
 string VMTranslator::vm_push(string segment, int offset){
-    return "";
+    string temp = "@";
+    temp += to_string(offset);
+    //constant
+    if (segment == "constant"){
+        temp += "\nD=A\n@SP\nAM=M+1\nA=A-1\nM=D";
+    }
+    //static
+    if (segment == "static"){
+        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+    }
+    //local
+    if (segment == "local"){
+        temp += "\nD=A\n@LCL\nA=D+M\nD=M\n@SP\nA=M\nM=D";
+    }
+    //argument
+    if (segment == "argument"){
+        temp += "\nD=M\n@ARG\nA=D+M\nD=M\n@SP\nA=M\nM=D";
+    }
+    //pointer
+    if (segment == "pointer"){
+        temp += "\nD+M\n@3\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+    }
+    //this
+    if (segment == "this"){
+        temp += "\nD+M\n@THIS\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+    }
+    //that
+    if (segment == "that"){
+        temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+    }    
+    //temp
+    if (segment == "temp"){
+        temp += "\nD+M\n@5\nA=D+A\nD=M\n@SP\nA=M\nM=D";
+    }
+    return temp;;
 }
 
 /** Generate Hack Assembly code for a VM pop operation */
