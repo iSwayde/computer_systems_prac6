@@ -28,31 +28,31 @@ string VMTranslator::vm_push(string segment, int offset){
     }
     //static
     else if (segment == "static"){
-        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD+M\n@16\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1";
     }
     //pointer
     else if (segment == "pointer"){
-        temp += "\nD+M\n@3\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD+M\n@3\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1";
     }
     //temp
     else if (segment == "temp"){
-        temp += "\nD+M\n@5\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD+M\n@5\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1";
     }
     //local
     else if (segment == "local"){
-        temp += "\nD=A\n@LCL\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD=A\n@LCL\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1";
     }
     //argument
     else if (segment == "argument"){
-        temp += "\nD=M\n@ARG\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD=M\n@ARG\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1";
     }
     //this
     else if (segment == "this"){
-        temp += "\nD+M\n@THIS\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD+M\n@THIS\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1";
     }
     //that
     else if (segment == "that"){
-        temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nAM=M+1\nA=A-1\nM=D";
+        temp += "\nD+M\n@THAT\nA=D+A\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1";
     }    
     return temp;
 }
