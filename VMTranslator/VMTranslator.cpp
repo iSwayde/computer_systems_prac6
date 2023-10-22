@@ -102,16 +102,23 @@ string VMTranslator::vm_pop(string segment, int offset){
     }
     //argument
     if (segment == "argument"){
-        temp += "@SP\nAM=M-1\nD=M\n@ARG\nM=D";
-    }
+        temp += "@SP\nAM=M-1\nD=A\n@ARG\n";
+        for (int i=0; i<offset; i++)
+            temp += "A=A+1\n";
+        temp += "M=D";    }
     //this
     if (segment == "this"){
-        temp += "@SP\nAM=M-1\nD=A\n@THIS\nM=D";
+        temp += "@SP\nAM=M-1\nD=A\n@THIS\n";
+        for (int i=0; i<offset; i++)
+            temp += "A=A+1\n";
+        temp += "M=D";
     }
     //that
-if (segment == "that"){
-        temp += "@SP\nAM=M-1\nD=A\n@THAT\nM=D";
-    }
+    if (segment == "that"){
+        temp += "@SP\nAM=M-1\nR3=A\n@THAT\n";
+        for (int i=0; i<offset; i++)
+            temp += "A=A+1\n";
+        temp += "M=D";    }
     return temp;
 }
 
