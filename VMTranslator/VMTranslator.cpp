@@ -172,16 +172,14 @@ string VMTranslator::vm_lt(){
 /** Generate Hack Assembly code for a VM and operation */
 string VMTranslator::vm_and(){
     string temp = "";
-    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nD=D&M\nM=-1\n@AND\nD;JGT\n";
-    temp += "@SP\nAM=M-1\nM=0\n(AND)";
+    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nM=D&M\n";
     return temp;
 }
 
 /** Generate Hack Assembly code for a VM or operation */
 string VMTranslator::vm_or(){
     string temp = "";
-    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nD=D|M\nM=-1\n@OR\nD;JGT\n";
-    temp += "@SP\nAM=M-1\nM=0\n(OR)";
+    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nM=D|M\n";
     return temp;
 }
 
