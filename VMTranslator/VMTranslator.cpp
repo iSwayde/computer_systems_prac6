@@ -75,7 +75,7 @@ string VMTranslator::vm_pop(string segment, int offset){
         temp += "M=D";
     }
     //pointer
-    if (segment == "xpointer"){
+    if (segment == "pointer"){
         temp += "@SP\nAM=M-1\nD=M\n@";
         if (offset == 0)
             temp += "3\n";
@@ -85,7 +85,7 @@ string VMTranslator::vm_pop(string segment, int offset){
         temp += "M=D";
     }
     //temp
-    if (segment == "temp"){
+    if (segment == "xtemp"){
         temp += "@SP\nAM=M-1\nD=M\n@5\n";
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
