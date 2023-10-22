@@ -66,8 +66,8 @@ string VMTranslator::vm_pop(string segment, int offset){
         temp += to_string(offset);
         temp += "M=D";
     }
-    //static
-    if (segment == "xstatic"){
+    //static (working)
+    if (segment == "static"){
         temp += "@SP\nAM=M-1\nD=M\n@16\n";
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
@@ -75,7 +75,7 @@ string VMTranslator::vm_pop(string segment, int offset){
         temp += "M=D";
     }
     //pointer
-    if (segment == "pointer"){
+    if (segment == "xpointer"){
         temp += "@SP\nAM=M-1\nD=M\n@";
         if (offset == 0)
             temp += "3\n";
