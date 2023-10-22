@@ -1,5 +1,5 @@
 #include <string>
-
+#include <iostream>
 #include "VMTranslator.h"
 
 using namespace std;
@@ -96,6 +96,7 @@ string VMTranslator::vm_pop(string segment, int offset){
         temp += "\nD=D+A\n@R13\nM=D\n@SP\nAM=M-1\nD=M\n";
         //save D into local 2 which is r13
         temp += "@R13\nA=m\nM=D\n";
+        cout << temp << endl;
     }
     //argument
     else if (segment == "argument"){
