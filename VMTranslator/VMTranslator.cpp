@@ -95,8 +95,7 @@ string VMTranslator::vm_pop(string segment, int offset){
         //save to r13 and pop into D
         temp += "\nD=D+A\n@R13\nM=D\n@SP\nAM=M-1\nD=M\n";
         //save D into local 2 which is r13
-        temp += "@R13\nA=m\nM=D\n";
-        cout << temp << endl;
+        temp += "@R13\nA=M\nM=D\n";
     }
     //argument
     else if (segment == "argument"){
