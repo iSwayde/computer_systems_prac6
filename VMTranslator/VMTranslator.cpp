@@ -186,7 +186,7 @@ string VMTranslator::vm_or(){
 /** Generate Hack Assembly code for a VM not operation */
 string VMTranslator::vm_not(){
     string temp = "";
-    temp += "@SP\nAM=M-1\nM=!M\n";
+    temp += "@SP\nAM=M-1\nD=M\nM=!D\n";
     return temp;
 }
 
