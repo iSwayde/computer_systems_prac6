@@ -60,12 +60,7 @@ string VMTranslator::vm_push(string segment, int offset){
 /** Generate Hack Assembly code for a VM pop operation */
 string VMTranslator::vm_pop(string segment, int offset){  
     string temp = "";
-    //constant
-    if (segment == "constant"){
-        temp += "@SP\nAM=M-1\nD=M\n@";
-        temp += to_string(offset);
-        temp += "M=D";
-    }
+
     //static (working)
     if (segment == "static"){
         temp += "@SP\nAM=M-1\nD=M\n@16\n";
@@ -74,8 +69,8 @@ string VMTranslator::vm_pop(string segment, int offset){
                 
         temp += "M=D";
     }
-    //pointer
-    if (segment == "pointer"){
+    //pointer (working)
+    else if (segment == "pointer"){
         temp += "@SP\nAM=M-1\nD=M\n@";
         if (offset == 0)
             temp += "3\n";
@@ -84,8 +79,8 @@ string VMTranslator::vm_pop(string segment, int offset){
                 
         temp += "M=D";
     }
-    //temp
-    if (segment == "temp"){
+    //temp (working)
+    else if (segment == "temp"){
         temp += "@SP\nAM=M-1\nD=M\n@5\n";
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
@@ -93,31 +88,35 @@ string VMTranslator::vm_pop(string segment, int offset){
         temp += "M=D";
     }
     //local
-    if (segment == "local"){
-        temp += "@SP\nAM=M-1\nD=M\n@LCL\n";
-        for (int i=0; i<offset; i++)
-            temp += "A=A+1\n";
-        temp += "M=D\n";
+    else if (segment == "local"){
+        //find local 2 and save it to R13
+        temp += "@LCL\nD=M\n@";
+        temp += to_string(offset);
+        //save to r13 and pop into D
+        temp += "\nD=D+A\n@R13\nM=D\n@SP\nAM=M-1\nD=M\n";
+        //save D into local 2 which is r13
+        temp += "@R13\nA=m\nM=D\n";
     }
     //argument
-    if (segment == "argument"){
+    else if (segment == "argument"){
         temp += "@SP\nAM=M-1\nD=A\n@ARG\n";
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
         temp += "M=D";    }
     //this
-    if (segment == "this"){
+    else if (segment == "this"){
         temp += "@SP\nAM=M-1\nD=A\n@THIS\n";
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
         temp += "M=D";
     }
     //that
-    if (segment == "that"){
+    else if (segment == "that"){
         temp += "@SP\nAM=M-1\nR3=A\n@THAT\n";
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
-        temp += "M=D";    }
+        temp += "M=D";    
+    }
     return temp;
 }
 
