@@ -85,7 +85,7 @@ string VMTranslator::vm_pop(string segment, int offset){
         temp += "M=D";
     }
     //temp
-    if (segment == "xtemp"){
+    if (segment == "temp"){
         temp += "@SP\nAM=M-1\nD=M\n@5\n";
         for (int i=0; i<offset; i++)
             temp += "A=A+1\n";
@@ -94,11 +94,9 @@ string VMTranslator::vm_pop(string segment, int offset){
     }
     //local
     if (segment == "local"){
-        temp += "@SP\nAM=M-1\nD=M\n@LCL\n";
-        for (int i=0; i<offset; i++)
-            temp += "A=A+1\n";
-        
-        temp += "M=D";
+        temp += "@SP\nAM=M-1\nD=M\n@";
+        temp += to_string(offset);
+        temp += "\nD=D+A\n@R1\nM=D\n@SP\nAM=M-1\nD=M\n@R1\nA=M\nM=D";
     }
     //argument
     if (segment == "argument"){
