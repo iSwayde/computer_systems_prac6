@@ -99,23 +99,27 @@ string VMTranslator::vm_pop(string segment, int offset){
     }
     //argument
     else if (segment == "argument"){
-        temp += "@SP\nAM=M-1\nD=A\n@ARG\n";
-        for (int i=0; i<offset; i++)
-            temp += "A=A+1\n";
-        temp += "M=D";    }
+    //find argument offset and save it to R13
+        temp += "@ARG\nD=M\n@";
+        temp += to_string(offset);
+        //save to r13 and pop into D
+        temp += "\nD=D+A\n@R13\nM=D\n@SP\nAM=M-1\nD=M\n";
+        //save D into argument offset which is r13
+        temp += "@R13\nA=M\nM=D\n";
+    }
     //this
     else if (segment == "this"){
-        temp += "@SP\nAM=M-1\nD=A\n@THIS\n";
-        for (int i=0; i<offset; i++)
-            temp += "A=A+1\n";
-        temp += "M=D";
+        temp += "@THIS\nD=M\n@";
+        temp += to_string(offset);
+        temp += "\nD=D+A\n@R13\nM=D\n@SP\nAM=M-1\nD=M\n";
+        temp += "@R13\nA=M\nM=D\n";
     }
     //that
     else if (segment == "that"){
-        temp += "@SP\nAM=M-1\nR3=A\n@THAT\n";
-        for (int i=0; i<offset; i++)
-            temp += "A=A+1\n";
-        temp += "M=D";    
+        temp += "@THAT\nD=M\n@";
+        temp += to_string(offset);
+        temp += "\nD=D+A\n@R13\nM=D\n@SP\nAM=M-1\nD=M\n";
+        temp += "@R13\nA=M\nM=D\n"; 
     }
     return temp;
 }
