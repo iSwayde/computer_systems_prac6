@@ -141,32 +141,55 @@ string VMTranslator::vm_neg(){
 
 /** Generate Hack Assembly code for a VM eq operation */
 string VMTranslator::vm_eq(){
-    return "";
+    string temp = "";
+    //subtract two values on the stack and jump to end and leave -1 on the stack
+    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nD=M-D\nM=-1\n@EQUAL\nD;JEQ\n";
+    //if not equal leave 0 on the stack
+    temp += "@SP\nA=M-1\nM=0\n(EQUAL)";
+    return temp;
 }
 
 /** Generate Hack Assembly code for a VM gt operation */
 string VMTranslator::vm_gt(){
-    return "";
+    string temp = "";
+    //sub value on top of stack from the value below it, put -1 on the stack and jump to end if result is > 0
+    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nD=M-D\nM=-1\n@GREATER\nD;JGT\n";
+    //if not > 0, leave 0 on the stack
+    temp += "@SP\nA=M-1\nM=0\n(GREATER)\n";
+    return temp;
 }
 
 /** Generate Hack Assembly code for a VM lt operation */
 string VMTranslator::vm_lt(){
-    return "";
+    string temp = "";
+    //same as vm_gt but jump if less than 0
+    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nD=M-D\nM=-1\n@LESS\nD;JLT\n";
+    temp += "@SP\nAM=M-1\nM=0\n(LESS)\n";
+
+    return temp;
 }
 
 /** Generate Hack Assembly code for a VM and operation */
 string VMTranslator::vm_and(){
-    return "";
+    string temp = "";
+    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nD=D&M\nM=-1\n@AND\nD;JGT\n";
+    temp += "@SP\nAM=M-1\nM=0\n(AND)";
+    return temp;
 }
 
 /** Generate Hack Assembly code for a VM or operation */
 string VMTranslator::vm_or(){
-    return "";
+    string temp = "";
+    temp += "@SP\nAM=M-1\nD=M\nA=A-1\nD=D|M\nM=-1\n@OR\nD;JGT\n";
+    temp += "@SP\nAM=M-1\nM=0\n(OR)";
+    return temp;
 }
 
 /** Generate Hack Assembly code for a VM not operation */
 string VMTranslator::vm_not(){
-    return "";
+    string temp = "";
+    temp += "@SP\nAM=M-1\nM=!M\n";
+    return temp;
 }
 
 /** Generate Hack Assembly code for a VM label operation */
