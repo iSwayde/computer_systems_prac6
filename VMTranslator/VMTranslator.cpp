@@ -94,9 +94,10 @@ string VMTranslator::vm_pop(string segment, int offset){
     }
     //local
     if (segment == "local"){
-        temp += "@SP\nAM=M-1\nD=M\n@";
-        temp += to_string(offset);
-        temp += "\nD=D+A\n@R1\nM=D\n@SP\nAM=M-1\nD=M\n@R1\nA=M\nM=D";
+        temp += "@SP\nAM=M-1\nD=M\n@LCL\n";
+        for (int i=0; i<offset; i++)
+            temp += "A=A+1\n";
+        temp += "M=D\n";
     }
     //argument
     if (segment == "argument"){
