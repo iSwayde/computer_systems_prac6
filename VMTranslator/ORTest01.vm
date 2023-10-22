@@ -1,0 +1,4 @@
+//testing or logic for true case
+push constant 1
+push constant 2
+or

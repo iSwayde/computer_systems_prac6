@@ -1,0 +1,4 @@
+//testing greater than logic for true case
+push constant 5
+push constant 2
+gt

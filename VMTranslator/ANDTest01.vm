@@ -1,0 +1,4 @@
+//testing bit-wise and logic for true case
+push constant 2
+push constant 2
+and

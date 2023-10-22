@@ -1,0 +1,2 @@
+//testing push of a variable from local to the stack
+push local 2

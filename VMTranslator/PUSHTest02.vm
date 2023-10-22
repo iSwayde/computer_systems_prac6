@@ -1,0 +1,2 @@
+//testing pushing a constant to the stack
+push constant 5

@@ -1,0 +1,2 @@
+//testing popping a value off the stack into local
+pop local 2
