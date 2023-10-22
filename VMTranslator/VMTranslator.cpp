@@ -164,7 +164,7 @@ string VMTranslator::vm_lt(){
     string temp = "";
     //same as vm_gt but jump if less than 0
     temp += "@SP\nAM=M-1\nD=M\nA=A-1\nD=M-D\nM=-1\n@LESS\nD;JLT\n";
-    temp += "@SP\nAM=M-1\nM=0\n(LESS)\n";
+    temp += "@SP\nA=M-1\nM=0\n(LESS)\n";
 
     return temp;
 }
@@ -186,7 +186,7 @@ string VMTranslator::vm_or(){
 /** Generate Hack Assembly code for a VM not operation */
 string VMTranslator::vm_not(){
     string temp = "";
-    temp += "@SP\nAM=M-1\nD=M\nM=!D\n";
+    temp += "@SP\nAM=M-1\nD=M\n@SP\nM=!D\n";
     return temp;
 }
 
